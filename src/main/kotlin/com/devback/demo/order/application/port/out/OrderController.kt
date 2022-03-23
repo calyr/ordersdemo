@@ -21,7 +21,7 @@ class OrderController(@Autowired val orderService: OrderService) {
 
     @GetMapping("/test")
     fun test() {
-        orderService.save(Order(OrderId(UUID.randomUUID()), OrderName("orden1"), Product(UUID.randomUUID(), ProductName("p1"), BigDecimal(10.99) )))
+        orderService.save(Order(OrderId(UUID.randomUUID()), OrderName("orden1"), Product( ProductName("p1"), BigDecimal(10.99) )))
     }
 
     @GetMapping

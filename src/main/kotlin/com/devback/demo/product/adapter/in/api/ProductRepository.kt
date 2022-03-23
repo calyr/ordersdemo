@@ -3,6 +3,8 @@ package com.devback.demo.product.adapter.`in`.api
 import com.devback.demo.product.application.`in`.IProductRepository
 import com.devback.demo.product.domain.Product
 import org.springframework.stereotype.Repository
+import java.util.*
+import kotlin.collections.ArrayList
 
 @Repository
 class ProductRepository: IProductRepository {
@@ -15,7 +17,17 @@ class ProductRepository: IProductRepository {
         return product
     }
 
-    override fun deleteProduct(product: Product) {
+    override fun updateProduct(product: Product): Product? {
+        val productOld = data.find { it.id == product.id }
+        val position = data.indexOf(productOld)
+        data.set(position, product)
+        return product
+
+    }
+
+    override fun deleteProduct(id: UUID) : Product? {
+        val product = data.find { it.id == id }
         data.remove(product)
+        return product
     }
 }

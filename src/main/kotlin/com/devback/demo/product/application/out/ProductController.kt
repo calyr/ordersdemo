@@ -1,15 +1,11 @@
 package com.devback.demo.product.application.out
 
-import com.devback.demo.product.application.`in`.IProductRepository
 import com.devback.demo.product.application.`in`.IProductService
 import com.devback.demo.product.domain.Product
-import com.devback.demo.product.domain.ProductName
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.stereotype.Repository
 import org.springframework.web.bind.annotation.*
-import java.math.BigDecimal
 import java.util.*
 
 @RestController
@@ -20,9 +16,13 @@ class ProductController(@Autowired private val productService: IProductService) 
     fun getList() = productService.getList()
 
     @PostMapping
-    fun add(@RequestBody product: Product) : ResponseEntity<Product> {
-        println(product)
-//        return ResponseEntity<Product>(productService.addProduct(Product(UUID.randomUUID(), ProductName("Product1"), BigDecimal(15.61) )), HttpStatus.OK)
-        return ResponseEntity<Product>(productService.addProduct(product), HttpStatus.OK)
-    }
+    fun add(@RequestBody product: Product) : ResponseEntity<Product> = ResponseEntity<Product>(productService.addProduct(product), HttpStatus.OK)
+
+    @PutMapping()
+    fun update(@RequestBody product: Product) : ResponseEntity<Product> = ResponseEntity<Product>(productService.updateProduct(product), HttpStatus.OK)
+
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: UUID): ResponseEntity<Product> = ResponseEntity<Product>(productService.deleteProduct(id), HttpStatus.OK)
+
 }
