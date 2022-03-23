@@ -22,7 +22,6 @@ class ProductRepository: IProductRepository {
         val position = data.indexOf(productOld)
         data.set(position, product)
         return product
-
     }
 
     override fun deleteProduct(id: UUID) : Product? {
