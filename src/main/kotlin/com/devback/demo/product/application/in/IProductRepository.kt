@@ -9,4 +9,5 @@ interface IProductRepository {
     fun addProduct(product: Product) : Any
     fun updateProduct(product: Product) : Any?
     fun deleteProduct( id: UUID) : Any?
+    fun findByName(name: String) : Any
 }

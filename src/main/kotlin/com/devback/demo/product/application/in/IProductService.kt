@@ -9,4 +9,5 @@ interface IProductService {
     fun deleteProduct(productId: UUID) : Any?
     fun getList() : ArrayList<Product>
     fun updateProduct(product: Product): Any?
+    fun findByName(name: String) : Any
 }

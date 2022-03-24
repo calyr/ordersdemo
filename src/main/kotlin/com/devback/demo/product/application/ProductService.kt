@@ -25,4 +25,7 @@ class ProductService(private val repository: IProductRepository): IProductServic
         return repository.updateProduct(product)
     }
 
+    override fun findByName(name: String): Any {
+        return repository.findByName(name)
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
+import javax.websocket.server.PathParam
 
 
 @RestController
@@ -33,5 +34,11 @@ class OrderController(@Autowired val orderService: OrderService) {
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: UUID): ResponseEntity<Any> = ResponseEntity<Any>(orderService.deleteOrder(id), HttpStatus.OK)
+
+    @PostMapping("/find/name")
+    fun findByName(@RequestParam value: OrderName) = orderService.findByName(value.value)
+
+    @PostMapping("/find/description")
+    fun findByDescription(@RequestParam value: OrderDescription) = orderService.findByDescription(value.value)
 
 }

@@ -12,4 +12,6 @@ interface IOrderRepository {
     fun getProducts(id: UUID): ArrayList<Product>
     fun getOrder(id: UUID): Any
     fun deleteOrder(id: UUID) : Any
+    fun findByName(name: String) : Any
+    fun findByDescription(description: String) : Any
 }

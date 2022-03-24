@@ -42,5 +42,13 @@ class OrderService(private val orderRepository: IOrderRepository, private val pr
         return orderRepository.deleteOrder(id)
     }
 
+    override fun findByName(name: String): Any {
+        return orderRepository.findByName(name)
+    }
+
+    override fun findByDescription(description: String): Any {
+        return orderRepository.findByDescription(description)
+    }
+
 
 }

@@ -41,7 +41,7 @@ class OrderRepository: IOrderRepository {
     override fun getOrder(id: UUID): Any {
         val order = data.find { it.id == id }
 
-        return if(order != null) {
+        if(order != null) {
             return ApiResponse(0, "The Order doesn't exit", result = order)
         } else {
             throw NotFoundException("The orderId doesn't belong in the order list.")
@@ -52,9 +52,19 @@ class OrderRepository: IOrderRepository {
         val order = data.find { it.id == id }
         return if(order != null) {
             data.remove(order)
-            return ApiResponse(0, "The order was deleted", result = order)
+            ApiResponse(0, "The order was deleted", result = order)
         } else {
             throw NotFoundException("The orderId doesn't belong in the Order list.")
         }
+    }
+
+    override fun findByName(name: String): Any {
+        val order = data.filter { it.name.value.contains(name) }
+        return ApiResponse(0, "Count result ${order.size}", result = order)
+    }
+
+    override fun findByDescription(name: String): Any {
+        val order = data.filter { it.description.value.contains(name) }
+        return ApiResponse(0, "Count result ${order.size}", result = order)
     }
 }

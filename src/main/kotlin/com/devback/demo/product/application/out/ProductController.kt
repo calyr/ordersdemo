@@ -1,6 +1,8 @@
 package com.devback.demo.product.application.out
 
 import com.devback.demo.order.application.port.out.error.NotFoundException
+import com.devback.demo.order.domain.OrderDescription
+import com.devback.demo.order.domain.OrderName
 import com.devback.demo.product.application.`in`.IProductService
 import com.devback.demo.product.domain.Product
 import org.springframework.beans.factory.annotation.Autowired
@@ -34,5 +36,8 @@ class ProductController(@Autowired private val productService: IProductService) 
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: UUID): ResponseEntity<Any> = ResponseEntity<Any>(productService.deleteProduct(id), HttpStatus.OK)
+
+    @PostMapping("/find/name")
+    fun findByName(@RequestParam value: OrderName) = productService.findByName(value.value)
 
 }

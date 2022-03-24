@@ -12,4 +12,7 @@ interface IOrdersUseCase {
     fun getOrder(id: UUID): Any
     fun getProducts(id: UUID): ArrayList<Product>
     fun deleteOrder(id: UUID): Any
+    fun findByName(name: String) : Any
+    fun findByDescription(description: String) : Any
+
 }

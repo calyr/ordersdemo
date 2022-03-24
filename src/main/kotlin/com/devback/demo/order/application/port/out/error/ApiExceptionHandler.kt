@@ -32,17 +32,5 @@ class ApiExceptionHandler {
         return ApiResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), exception.message, null)
     }
 
-//    fun handleMethodArgumentNotValid(
-//        ex: MethodArgumentNotValidException, headers: HttpHeaders?,
-//        status: HttpStatus?, request: WebRequest?
-//    ): ResponseEntity<Any?>? {
-//        val body: MutableMap<String, List<String?>> = HashMap()
-//        val errors = ex.bindingResult
-//            .fieldErrors
-//            .stream()
-//            .map { obj: FieldError -> obj.defaultMessage }
-//            .collect(Collectors.toList())
-//        body["errors"] = errors
-//        return ResponseEntity(body, HttpStatus.BAD_REQUEST)
-//    }
+
 }

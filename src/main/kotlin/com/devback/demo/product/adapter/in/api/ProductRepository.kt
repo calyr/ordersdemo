@@ -32,7 +32,7 @@ class ProductRepository: IProductRepository {
     override fun updateProduct(product: Product): Any? {
         val productOld = data.find { it.id == product.id }
 
-        return if(productOld != null) {
+        if(productOld != null) {
             val position = data.indexOf(productOld)
             data.set(position, product)
             return ApiResponse(0, "The product updated", result = product)
@@ -49,5 +49,10 @@ class ProductRepository: IProductRepository {
         } else {
             throw NotFoundException("The productId doesn't belong in the product list.")
         }
+    }
+
+    override fun findByName(name: String): Any {
+        val order = data.filter { it.name.value.contains(name) }
+        return ApiResponse(0, "Count result ${order.size}", result = order)
     }
 }
