@@ -140,7 +140,10 @@ replay_pid*
 **/build/
 !src/**/build/
 
-.gradle/**
+.gradle/7.4.1/executionHistory/executionHistory.lock
+.gradle/7.4.1/fileHashes/fileHashes.lock
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+
 # Ignore Gradle GUI config
 gradle-app.setting
 

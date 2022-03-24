@@ -9,11 +9,11 @@ import kotlin.collections.ArrayList
 
 @Service
 class ProductService(private val repository: IProductRepository): IProductService {
-    override fun addProduct(product: Product): Product {
+    override fun addProduct(product: Product): Any {
        return repository.addProduct(product)
     }
 
-    override fun deleteProduct(id: UUID): Product? {
+    override fun deleteProduct(id: UUID): Any? {
         return repository.deleteProduct(id)
     }
 
@@ -21,7 +21,7 @@ class ProductService(private val repository: IProductRepository): IProductServic
         return repository.getList()
     }
 
-    override fun updateProduct(product: Product): Product? {
+    override fun updateProduct(product: Product): Any? {
         return repository.updateProduct(product)
     }
 

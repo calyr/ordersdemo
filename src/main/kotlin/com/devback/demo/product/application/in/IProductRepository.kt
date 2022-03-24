@@ -6,7 +6,7 @@ import kotlin.collections.ArrayList
 
 interface IProductRepository {
     fun getList(): ArrayList<Product>
-    fun addProduct(product: Product) : Product
-    fun updateProduct(product: Product) : Product?
-    fun deleteProduct( id: UUID) : Product?
+    fun addProduct(product: Product) : Any
+    fun updateProduct(product: Product) : Any?
+    fun deleteProduct( id: UUID) : Any?
 }

@@ -1,5 +1,7 @@
 package com.devback.demo.product.adapter.`in`.api
 
+import com.devback.demo.order.application.port.out.error.ApiResponse
+import com.devback.demo.order.application.port.out.error.NotFoundException
 import com.devback.demo.product.application.`in`.IProductRepository
 import com.devback.demo.product.domain.Product
 import com.devback.demo.product.domain.ProductName
@@ -16,21 +18,36 @@ class ProductRepository: IProductRepository {
 
     override fun getList(): ArrayList<Product> = data
 
-    override fun addProduct(product: Product) : Product {
-        data.add(product)
-        return product
+    override fun addProduct(product: Product): Any {
+
+        return if(product != null) {
+            data.add(product)
+            return product
+            return ApiResponse(0, "The product created", result = product)
+        } else {
+            throw NotFoundException("Invalid product")
+        }
     }
 
-    override fun updateProduct(product: Product): Product? {
+    override fun updateProduct(product: Product): Any? {
         val productOld = data.find { it.id == product.id }
-        val position = data.indexOf(productOld)
-        data.set(position, product)
-        return product
+
+        return if(productOld != null) {
+            val position = data.indexOf(productOld)
+            data.set(position, product)
+            return ApiResponse(0, "The product updated", result = product)
+        } else {
+            throw NotFoundException("The productId doesn't belong in the product list.")
+        }
     }
 
-    override fun deleteProduct(id: UUID) : Product? {
+    override fun deleteProduct(id: UUID): Any? {
         val product = data.find { it.id == id }
-        data.remove(product)
-        return product
+        return if(product != null) {
+            data.remove(product)
+            return ApiResponse(0, "The product deleted", result = product)
+        } else {
+            throw NotFoundException("The productId doesn't belong in the product list.")
+        }
     }
 }

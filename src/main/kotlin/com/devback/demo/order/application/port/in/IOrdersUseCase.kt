@@ -6,9 +6,10 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 interface IOrdersUseCase {
-    fun getOrders(): ArrayList<Order>
+    fun getOrders(): Any
     fun create(order: Order) : Order
-    fun addProduct(id: UUID, productId: UUID): Order?
-    fun getOrder(id: UUID): Order?
+    fun addProduct(id: UUID, productId: UUID): Any?
+    fun getOrder(id: UUID): Any
     fun getProducts(id: UUID): ArrayList<Product>
+    fun deleteOrder(id: UUID): Any
 }

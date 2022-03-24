@@ -6,10 +6,10 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 interface IOrderRepository {
-    fun findById(id: UUID) : Optional<Order>
-    fun add(order: Order) : Order
-    fun getItems(): ArrayList<Order>
-    fun addProduct(id: UUID, product: Product): Order?
+    fun add(order: Order) : Any
+    fun getItems(): Any
+    fun addProduct(id: UUID, product: Product): Any
     fun getProducts(id: UUID): ArrayList<Product>
-    fun getOrder(id: UUID): Order?
+    fun getOrder(id: UUID): Any
+    fun deleteOrder(id: UUID) : Any
 }

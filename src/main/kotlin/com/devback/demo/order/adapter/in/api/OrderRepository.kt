@@ -1,6 +1,8 @@
 package com.devback.demo.order.adapter.`in`.api
 
 import com.devback.demo.order.application.port.`in`.IOrderRepository
+import com.devback.demo.order.application.port.out.error.ApiResponse
+import com.devback.demo.order.application.port.out.error.NotFoundException
 import com.devback.demo.order.domain.Order
 import com.devback.demo.product.domain.Product
 import org.springframework.stereotype.Repository
@@ -12,20 +14,23 @@ class OrderRepository: IOrderRepository {
 
     private val data = ArrayList<Order>()
 
-    override fun findById(id: UUID): Optional<Order> {
-        TODO("Not yet implemented")
-    }
-
-    override fun add(order: Order): Order {
+    override fun add(order: Order): Any {
         data.add(order)
-        return order
+        return ApiResponse(0, "The Order was created", result = order)
     }
 
-    override fun getItems() = data
-    override fun addProduct(id: UUID, product: Product) : Order? {
+    override fun getItems(): Any {
+        return ApiResponse(0, "Total orders (${data.size})", result = data)
+    }
+    override fun addProduct(id: UUID, product: Product): Any {
         val order = data.find { it.id == id }
-        order?.addProduct(product)
-        return order
+        return if(order != null) {
+            order.addProduct(product)
+            return ApiResponse(0, "The product added", result = order)
+        } else {
+            throw NotFoundException("The orderId doesn't belong in the order list.")
+        }
+
     }
 
     override fun getProducts(id: UUID): ArrayList<Product> {
@@ -33,8 +38,23 @@ class OrderRepository: IOrderRepository {
         return order?.items ?: arrayListOf()
     }
 
-    override fun getOrder(id: UUID): Order? {
+    override fun getOrder(id: UUID): Any {
         val order = data.find { it.id == id }
-        return order
+
+        return if(order != null) {
+            return ApiResponse(0, "The Order doesn't exit", result = order)
+        } else {
+            throw NotFoundException("The orderId doesn't belong in the order list.")
+        }
+    }
+
+    override fun deleteOrder(id: UUID): Any {
+        val order = data.find { it.id == id }
+        return if(order != null) {
+            data.remove(order)
+            return ApiResponse(0, "The order was deleted", result = order)
+        } else {
+            throw NotFoundException("The orderId doesn't belong in the Order list.")
+        }
     }
 }
