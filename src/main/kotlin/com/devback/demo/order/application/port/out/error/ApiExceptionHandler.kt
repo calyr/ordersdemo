@@ -15,8 +15,6 @@ import java.util.stream.Collectors
 
 @ControllerAdvice
 class ApiExceptionHandler {
-
-
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler( NotFoundException::class)
     @ResponseBody
@@ -31,6 +29,4 @@ class ApiExceptionHandler {
         exception.printStackTrace()
         return ApiResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), exception.message, null)
     }
-
-
 }

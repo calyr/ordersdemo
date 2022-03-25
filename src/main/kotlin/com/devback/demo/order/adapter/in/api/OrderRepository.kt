@@ -42,7 +42,7 @@ class OrderRepository: IOrderRepository {
         val order = data.find { it.id == id }
 
         if(order != null) {
-            return ApiResponse(0, "The Order doesn't exit", result = order)
+            return ApiResponse(0, "Successful", result = order)
         } else {
             throw NotFoundException("The orderId doesn't belong in the order list.")
         }

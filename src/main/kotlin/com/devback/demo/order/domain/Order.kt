@@ -19,7 +19,6 @@ data class Order(val name: OrderName, val description: OrderDescription) {
             "the Order name cannot be null"
         }
     }
-
     fun addProduct(product: Product) {
         items.add(product)
         total = total.add(product.price)

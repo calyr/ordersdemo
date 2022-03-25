@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan
 import java.math.BigDecimal
 import java.util.*
 
-data class Product(val name: ProductName, val price: BigDecimal) {
+data class Product(var name: ProductName, var price: BigDecimal) {
     val id: UUID = UUID.randomUUID()
     init {
         require( price > BigDecimal.ZERO) {
@@ -20,3 +20,4 @@ data class Product(val name: ProductName, val price: BigDecimal) {
         }
     }
 }
+

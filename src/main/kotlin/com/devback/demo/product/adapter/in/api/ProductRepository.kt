@@ -29,12 +29,14 @@ class ProductRepository: IProductRepository {
         }
     }
 
-    override fun updateProduct(product: Product): Any? {
-        val productOld = data.find { it.id == product.id }
+    override fun updateProduct(id: UUID, name: ProductName, price: BigDecimal): Any? {
+        val product = data.find { it.id == id }
 
-        if(productOld != null) {
-            val position = data.indexOf(productOld)
-            data.set(position, product)
+        if(product != null) {
+            val position = data.indexOf(product)
+            product.price = price
+            product.name = name
+            data.set(position,product )
             return ApiResponse(0, "The product updated", result = product)
         } else {
             throw NotFoundException("The productId doesn't belong in the product list.")

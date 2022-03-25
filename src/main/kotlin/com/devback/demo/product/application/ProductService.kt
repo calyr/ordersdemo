@@ -3,7 +3,9 @@ package com.devback.demo.product.application
 import com.devback.demo.product.application.`in`.IProductRepository
 import com.devback.demo.product.application.`in`.IProductService
 import com.devback.demo.product.domain.Product
+import com.devback.demo.product.domain.ProductName
 import org.springframework.stereotype.Service
+import java.math.BigDecimal
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -21,8 +23,8 @@ class ProductService(private val repository: IProductRepository): IProductServic
         return repository.getList()
     }
 
-    override fun updateProduct(product: Product): Any? {
-        return repository.updateProduct(product)
+    override fun updateProduct(id: UUID, name: ProductName, price: BigDecimal): Any? {
+        return repository.updateProduct(id, name, price)
     }
 
     override fun findByName(name: String): Any {
